@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Callback Hell</title>
+    <style>
+        #text1,
+        #text2,
+        #text3,
+        #text4 {
+            visibility: hidden;
+            /* hide all initially */
+            margin: 10px 0;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="text1">Text 1</div>
+    <div id="text2">Text 2</div>
+    <div id="text3">Text 3</div>
+    <div id="text4">Text 4</div>
+
+    <script>
+        const t1 = document.getElementById("text1");
+        const t2 = document.getElementById("text2");
+        const t3 = document.getElementById("text3");
+        const t4 = document.getElementById("text4");
+
+
+
+        // Callback hell 
+        // setTimeout(() => {
+        //   t1.style.visibility = "visible";
+
+        //   setTimeout(() => {
+        //     t2.style.visibility = "visible";
+
+        //     setTimeout(() => {
+        //       t3.style.visibility = "visible";
+
+        //       setTimeout(() => {
+        //         t4.style.visibility = "visible";
+        //       }, 500);
+
+        //     }, 500);
+
+        //   }, 500);
+
+        // }, 500);
+
+
+        // Promise concept
+        new Promise((resolve, reject) => {
+            setTimeout(() => {
+                t1.style.visibility = "visible";
+                resolve();
+            }, 1000);
+        }).then(() => {
+            // promise chaining
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    t2.style.visibility = "visible";
+                    resolve();
+                }, 1000);
+            })
+        }).then(() => {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    t3.style.visibility = "visible";
+                    resolve();
+                }, 3000);
+            })
+        }).then(() => {
+            setTimeout(() => {
+                t4.style.visibility = "visible";
+            }, 1000);
+        })
+
+
+    </script>
+</body>
+
+</html>
