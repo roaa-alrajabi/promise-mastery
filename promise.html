@@ -79,6 +79,27 @@
         })
 
 
+        // second example of promise
+        // here we want to get the users and then get the posts
+        function getUsers() {
+            return new Promise((resolve, reject) => {
+                fetch('https://jsonplaceholder.typicode.com/users')
+                    // response.json() returns a Promise, which is why we need another .then() after the first one               
+                    .then(response => response.json())
+                    .then(json => console.log(json) , resolve())
+            })
+        }
+
+        function getPosts() {
+            fetch('https://jsonplaceholder.typicode.com/posts/1')
+                // response.json() returns a Promise, which is why we need another .then() after the first one               
+                .then(response => response.json())
+                .then(json => console.log(json))
+        }
+
+        getUsers().then(() => {
+            getPosts();
+        });
     </script>
 </body>
 
